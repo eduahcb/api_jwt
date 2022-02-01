@@ -1,7 +1,10 @@
 import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
+import routes from './routes'
 
+import exceptionHandler from './middlewares/exceptionHandler'
+require('express-async-errors')
 class App {
   private server: express.Application
 
@@ -15,8 +18,19 @@ class App {
     this.server.use(cors())
   }
 
+  private routes(): void {
+    this.server.use(routes())
+  }
+
+  private exceptionHandler(): void {
+    this.server.use(exceptionHandler)
+  }
+
   init(): express.Application {
     this.middleware()
+    this.routes()
+    this.exceptionHandler()
+
     return this.server
   }
 }
