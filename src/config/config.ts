@@ -17,6 +17,6 @@ const config = convict({
 
 const env = config.get('env')
 
-config.load(`./src/environments/${env}.json`)
+config.loadFile(`./src/environments/${env}.json`)
 
 export default config
