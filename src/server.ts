@@ -1,7 +1,9 @@
 import App from './app'
-import { config } from './config'
+import { config, startConnection } from './config'
 
-const startServer = (): void => {
+const startServer = async (): Promise<void> => {
+  await startConnection()
+
   const app = new App().init()
 
   const port = config.get('port')
