@@ -9,8 +9,8 @@ export default async (
 ): Promise<void | Response> => {
   try {
     const schema = Joi.object({
-      name: Joi.string().email().required(),
-      email: Joi.string().required(),
+      name: Joi.string().required(),
+      email: Joi.string().email().required(),
       password: Joi.string().required(),
     })
 
