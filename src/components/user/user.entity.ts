@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import {
   Entity,
   Column,
@@ -22,10 +23,9 @@ class User {
   private email: string
 
   @Column({ nullable: false })
-  private passwordHash!: string
+  private password_hash!: string
 
   @CreateDateColumn()
-  // eslint-disable-next-line camelcase
   private created_at!: Date
 
   static password: string
