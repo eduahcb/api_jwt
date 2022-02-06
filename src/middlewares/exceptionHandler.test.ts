@@ -16,6 +16,15 @@ describe('exceptionHandler', () => {
     message: 'this is a error',
   }
 
+  const exceptionFunction = async (error: any): Promise<void> => {
+    await exceptionHandler(
+      error,
+      reqMock as Request,
+      resMock as Response,
+      nextMock as NextFunction
+    )
+  }
+
   beforeEach(() => {
     reqMock = {}
 
@@ -28,12 +37,7 @@ describe('exceptionHandler', () => {
   test('should return a application error when is not development env', async () => {
     errorMock.isOperational = false
 
-    await exceptionHandler(
-      errorMock,
-      reqMock as Request,
-      resMock as Response,
-      nextMock as NextFunction
-    )
+    await exceptionFunction(errorMock)
 
     expect(resMock.status).toBeCalledWith(500)
 
@@ -48,12 +52,7 @@ describe('exceptionHandler', () => {
 
     config.set('env', 'development')
 
-    await exceptionHandler(
-      errorMock,
-      reqMock as Request,
-      resMock as Response,
-      nextMock as NextFunction
-    )
+    await exceptionFunction(errorMock)
 
     expect(resMock.status).toBeCalledWith(500)
 
@@ -68,14 +67,9 @@ describe('exceptionHandler', () => {
   test('should return a operational error', async () => {
     errorMock.isOperational = true
 
-    await exceptionHandler(
-      errorMock,
-      reqMock as Request,
-      resMock as Response,
-      nextMock as NextFunction
-    )
+    await exceptionFunction(errorMock)
 
-    // expect(resMock.status).toBeCalledWith(400)
+    expect(resMock.status).toBeCalledWith(400)
 
     expect(resMock.json).toBeCalledWith({
       message: 'this is a error',
