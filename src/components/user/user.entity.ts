@@ -22,11 +22,11 @@ class User {
   @Column({ nullable: false })
   private email: string
 
-  @Column({ nullable: false })
-  private password_hash!: string
+  @Column({ name: 'password_hash', nullable: false })
+  private passwordHash!: string
 
-  @CreateDateColumn()
-  private created_at!: Date
+  @CreateDateColumn({ name: 'created_at' })
+  private createdAt!: Date
 
   static password: string
 
@@ -49,7 +49,7 @@ class User {
 
   @BeforeInsert()
   private generatedCreateAt() {
-    this.created_at = zonedTimeToUtc(new Date(), '', {
+    this.createdAt = zonedTimeToUtc(new Date(), '', {
       timeZone: 'America/Sao_Paulo',
     })
   }
