@@ -1,11 +1,7 @@
-/* eslint-disable prettier/prettier */
 import { Request, Response } from 'express'
 import { getRepository, Repository } from 'typeorm'
 import User from './user.entity'
 import UserForm from './user.form'
-
-
-
 
 class UserController {
   userRepository: Repository<User>
@@ -18,8 +14,8 @@ class UserController {
     const newUser = new UserForm(req.body).toModel()
 
     const user = await this.userRepository.save(newUser)
-  
-    res.status(201).json(user)   
+
+    res.status(201).json(user)
   }
 }
 
