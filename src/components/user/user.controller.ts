@@ -11,7 +11,7 @@ class UserController {
   }
 
   create = async (req: Request, res: Response): Promise<void> => {
-    const newUser = new UserForm(req.body).toModel()
+    const newUser = await new UserForm(req.body).toModel()
 
     const user = await this.userRepository.save(newUser)
 
