@@ -1,7 +1,12 @@
-import { createConnection } from 'typeorm'
+import { createConnection, getConnection } from 'typeorm'
 
-const startConnection = async (): Promise<void> => {
+export const startConnection = async (): Promise<void> => {
   await createConnection()
 }
 
-export default startConnection
+export const closeConnection = async (): Promise<void> => {
+  const connection = getConnection()
+  if (connection.isConnected) {
+    await connection.close()
+  }
+}
