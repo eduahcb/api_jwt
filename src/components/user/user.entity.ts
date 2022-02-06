@@ -69,6 +69,10 @@ class User {
   get PassWord(): string {
     return this.passwordHash
   }
+
+  get CreatedAt(): Date {
+    return this.createdAt
+  }
 }
 
 export default User

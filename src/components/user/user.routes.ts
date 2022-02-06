@@ -10,6 +10,8 @@ const userRouter = (): Router => {
 
   routes.post('/', userValidator, userController.create)
 
+  routes.get('/', userController.getAll)
+
   return routes
 }
 
