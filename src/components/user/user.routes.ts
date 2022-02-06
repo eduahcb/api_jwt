@@ -12,6 +12,8 @@ const userRouter = (): Router => {
 
   routes.get('/', userController.getAll)
 
+  routes.get('/:id', userController.getById)
+
   return routes
 }
 

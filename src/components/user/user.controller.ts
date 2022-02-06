@@ -1,5 +1,7 @@
 import { Request, Response } from 'express'
 import { getRepository, Repository } from 'typeorm'
+import { NotFoundException } from '../../exceptions'
+
 import User from './user.entity'
 import UserForm from './user.form'
 import UserResponse from './user.response'
@@ -25,6 +27,20 @@ class UserController {
     const usersResponse = users.map((user) => new UserResponse(user))
 
     res.status(200).json(usersResponse)
+  }
+
+  getById = async (req: Request, res: Response): Promise<void> => {
+    const { id } = req.params
+
+    const user = await this.userRepository.findOne(id)
+
+    if (!user) {
+      throw new NotFoundException()
+    }
+
+    const userResponse = new UserResponse(user)
+
+    res.status(200).json(userResponse)
   }
 }
 
