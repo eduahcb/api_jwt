@@ -37,7 +37,7 @@ class Factory {
     return optionsResult
   }
 
-  async create(name: string): Promise<void> {
+  async create(name: string): Promise<any> {
     const factory = this.factories.reduce((prev: any, current: any) => {
       if (current.name === name) {
         prev = current
@@ -45,7 +45,10 @@ class Factory {
       return current
     }, {})
     const repository = getRepository(factory.entity)
-    await repository.save(factory.instance)
+
+    const entity = await repository.save(factory.instance)
+
+    return entity
   }
 }
 
