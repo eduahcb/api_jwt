@@ -6,7 +6,8 @@ describe('HttpException', () => {
     const exception = () => {
       throw new HttpException(
         'this is a HttpException',
-        HttpStatusCode.NOT_FOUND
+        HttpStatusCode.NOT_FOUND,
+        true
       )
     }
 
@@ -18,7 +19,8 @@ describe('HttpException', () => {
     try {
       throw new HttpException(
         'this a HttpException message',
-        HttpStatusCode.INTERNAL_SERVER_ERROR
+        HttpStatusCode.INTERNAL_SERVER_ERROR,
+        true
       )
     } catch (error: any) {
       expect(error).toBeInstanceOf(HttpException)
