@@ -13,6 +13,12 @@ const config = convict({
     default: 8080,
     env: 'PORT',
   },
+  jwtSecretKey: {
+    doc: 'Secret key to jwt',
+    format: '*',
+    default: '',
+    env: 'JWT_SECRET_KEY',
+  },
 })
 
 const env = config.get('env')
