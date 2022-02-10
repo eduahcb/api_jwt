@@ -8,7 +8,7 @@ const startFactories = (): Factory => {
 
   const name = casual.name
   const email = casual.email
-  const password = casual.password
+  const password = '123'
 
   const userFactory = new User(name, email, password)
 
