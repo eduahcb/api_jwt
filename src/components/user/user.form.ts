@@ -31,7 +31,8 @@ class UserForm {
     if (user) {
       throw new HttpException(
         'email already exists',
-        HttpStatusCode.BAD_REQUEST
+        HttpStatusCode.BAD_REQUEST,
+        true
       )
     }
 
