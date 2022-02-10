@@ -1,10 +1,13 @@
+import 'express-async-errors'
+import './config/autStrategy'
+import './config/bearerStrategy'
+
 import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
 import routes from './routes'
 
 import exceptionHandler from './middlewares/exceptionHandler'
-require('express-async-errors')
 class App {
   private server: express.Application
 
