@@ -1,5 +1,5 @@
 import 'express-async-errors'
-import './config/autStrategy'
+import './config/authStrategy'
 import './config/bearerStrategy'
 
 import express from 'express'
