@@ -23,7 +23,7 @@ export default async function bearerAuth(
       if (error) {
         throw new HttpException(
           error.message,
-          HttpStatusCode.UNAUTHORIZED,
+          HttpStatusCode.INTERNAL_SERVER_ERROR,
           false
         )
       }
