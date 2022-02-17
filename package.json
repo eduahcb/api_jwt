@@ -57,7 +57,7 @@
   },
   "scripts": {
     "start:dev": "tsnd --respawn src/server.ts",
-    "test": "jest --coverage=false --watchAll=true",
+    "test": "jest --coverage=false --watchAll=true -i",
     "cov": "jest --coverage --watchAll=false",
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js"
   }
