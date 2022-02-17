@@ -42,6 +42,20 @@ class UserController {
 
     res.status(200).json(userResponse)
   }
+
+  delete = async (req: Request, res: Response): Promise<void> => {
+    const { id } = req.params
+
+    const user = await this.userRepository.findOne(id)
+
+    if (!user) {
+      throw new NotFoundException()
+    }
+
+    await this.userRepository.delete(id)
+
+    res.status(204).send()
+  }
 }
 
 export default UserController

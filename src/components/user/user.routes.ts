@@ -3,6 +3,8 @@ import UserController from './user.controller'
 
 import userValidator from './user.validator'
 
+import bearerAuth from '../../middlewares/bearerAuth'
+
 const userRouter = (): Router => {
   const userController = new UserController()
 
@@ -13,6 +15,8 @@ const userRouter = (): Router => {
   routes.get('/', userController.getAll)
 
   routes.get('/:id', userController.getById)
+
+  routes.delete('/:id', bearerAuth, userController.delete)
 
   return routes
 }
