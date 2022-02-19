@@ -9,7 +9,7 @@ import startFactory from '../../utils/factories'
 
 import truncate from '../../helpers/truncate'
 
-describe('POST /login', () => {
+describe('POST /logout', () => {
   let app: express.Application
 
   let factory: Factory
@@ -29,10 +29,10 @@ describe('POST /login', () => {
     await closeConnection()
   })
 
-  test('should realize the login', async () => {
+  test('should realize the logout', async () => {
     const userFactory = await factory.create('user')
 
-    const result = await request(app).post('/api/v1/login').send({
+    const result = await request(app).get('/api/v1/logout').send({
       email: userFactory.Email,
       password: '123',
     })
@@ -43,7 +43,7 @@ describe('POST /login', () => {
   test('should return unauthorized status', async () => {
     const userFactory = await factory.create('user')
 
-    const result = await request(app).post('/api/v1/login').send({
+    const result = await request(app).get('/api/v1/logout').send({
       email: userFactory.Email,
       password: '1234',
     })
