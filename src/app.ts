@@ -5,9 +5,13 @@ import './config/bearerStrategy'
 import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
+import swaggerUi from 'swagger-ui-express'
 import routes from './routes'
 
+import { apiBaseUrl } from './config/constants/constants'
 import exceptionHandler from './middlewares/exceptionHandler'
+
+import swaggerOptions from './config/swagger'
 class App {
   private server: express.Application
 
@@ -29,10 +33,19 @@ class App {
     this.server.use(exceptionHandler)
   }
 
+  private swagger = () => {
+    this.server.use(
+      `${apiBaseUrl}/doc`,
+      swaggerUi.serve,
+      swaggerUi.setup(swaggerOptions())
+    )
+  }
+
   init(): express.Application {
     this.middleware()
     this.routes()
     this.exceptionHandler()
+    this.swagger()
 
     return this.server
   }
