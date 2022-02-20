@@ -36,7 +36,15 @@ describe('exceptionHandler', () => {
   }
 
   test('should call next function success', async () => {
-    await passportAuthenticate(undefined, { id: 'rieuwsoriu' }, undefined)
+    await passportAuthenticate(
+      undefined,
+      { id: 'rieuwsoriu' },
+      { token: 'faklf2' }
+    )
+
+    reqMock = {
+      token: '',
+    }
 
     await bearerAuthFunction()
 

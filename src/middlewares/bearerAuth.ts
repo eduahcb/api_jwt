@@ -12,7 +12,10 @@ export default async function bearerAuth(
 ): Promise<void> {
   passport.authenticate('bearer', { session: false }, (error, user, info) => {
     try {
-      if (error && error.name === 'JsonWebTokenError') {
+      if (
+        (error && error.name === 'JsonWebTokenError') ||
+        (error && error.name === 'TokenExpiredError')
+      ) {
         throw new HttpException(
           error.message,
           HttpStatusCode.UNAUTHORIZED,
@@ -32,6 +35,7 @@ export default async function bearerAuth(
         throw new UnauthorizeException()
       }
 
+      req.token = info.token
       next()
     } catch (error) {
       next(error)
