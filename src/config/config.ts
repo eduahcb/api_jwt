@@ -19,6 +19,12 @@ const config = convict({
     default: '',
     env: 'JWT_SECRET_KEY',
   },
+  rollbarAccessToken: {
+    doc: 'Access token from rollbar',
+    format: '*',
+    default: '',
+    env: 'ROLLBAR_ACCESS_TOKEN',
+  },
 })
 
 const env = config.get('env')
