@@ -10,7 +10,17 @@ jobs:
       - node/install:
           install-yarn: true
       - run: node --version
+  eslint:
+    steps:
+     - checkout
+     - node/install-packages:
+        pkg-manager: yarn
+      - run:
+          command: yarn lint
+          name: RUN ESLINT  
+
 workflows:
   ci:
     jobs:
       - install-node
+      - eslint
