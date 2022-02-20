@@ -54,15 +54,16 @@
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
     "pg": "^8.7.3",
+    "redis": "^4.0.3",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.3.0",
     "typeorm": "^0.2.41",
     "uuid": "^8.3.2"
   },
   "scripts": {
-    "start:dev": "tsnd --respawn src/server.ts",
+    "start:dev": "tsnd --respawn --inspect=4321 --transpile-only src/server.ts",
     "test": "jest --coverage=false --watchAll=true -i",
-    "cov": "jest --coverage --watchAll=false",
+    "cov": "jest --coverage --watchAll=false -i",
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js"
   }
 }
