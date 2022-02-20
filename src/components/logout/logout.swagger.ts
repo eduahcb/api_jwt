@@ -1,19 +1,6 @@
 /**
  * @openapi
  * components:
- *   schemas:
- *     Login:
- *      type: object
- *      properties:
- *        email:
- *          type: string
- *        password:
- *          type: string
- */
-
-/**
- * @openapi
- * components:
  *   securitySchemes:
  *    bearerAuth:
  *     type: http
@@ -24,27 +11,20 @@
 /**
  * @openapi
  * tags:
- *   - name: Login
- *     description: Login
+ *   - name: Logout
+ *     description: Logout
  */
 
 /**
  * @openapi
  * /login:
- *  post:
+ *  get:
  *   tags:
- *   - Login
- *   summary: User Login
- *   requestBody:
- *    description: Login object that needs to make login
- *    content:
- *     application/json:
- *      schema:
- *       $ref: '#/components/schemas/Login'
- *    required: true
+ *   - Logout
+ *   summary: User Logout
  *   responses:
  *    204:
- *     description: return token in the header
+ *     description: user was logged out
  *    401:
  *     description: Unauthorized
  *     content:
@@ -71,4 +51,6 @@
  *         statusCode:
  *          type: number
  *          default: 500
+ *   security:
+ *    - bearerAuth: []
  */

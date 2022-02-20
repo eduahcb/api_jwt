@@ -14,6 +14,17 @@ describe('POST /logout', () => {
 
   let factory: Factory
 
+  const shouldMakeLogin = async (email: string, password: string) => {
+    // const userFactory = await factory.create('user')
+
+    const result = await request(app).post('/api/v1/login').send({
+      email,
+      password,
+    })
+
+    return result.headers.authorization
+  }
+
   beforeEach(async () => {
     await startConnection()
 
@@ -32,10 +43,12 @@ describe('POST /logout', () => {
   test('should realize the logout', async () => {
     const userFactory = await factory.create('user')
 
-    const result = await request(app).get('/api/v1/logout').send({
-      email: userFactory.Email,
-      password: '123',
-    })
+    const token = await shouldMakeLogin(userFactory.Email, '123')
+
+    const result = await request(app)
+      .get('/api/v1/logout')
+      .set('Authorization', `Bearer ${token}`)
+      .send()
 
     expect(result.statusCode).toBe(204)
   })
@@ -43,11 +56,23 @@ describe('POST /logout', () => {
   test('should return unauthorized status', async () => {
     const userFactory = await factory.create('user')
 
-    const result = await request(app).get('/api/v1/logout').send({
-      email: userFactory.Email,
-      password: '1234',
-    })
+    const token = await shouldMakeLogin(userFactory.Email, '123')
 
-    expect(result.statusCode).toBe(401)
+    const result = await request(app)
+      .get('/api/v1/logout')
+      .set('Authorization', `Bearer ${token}`)
+      .send()
+
+    expect(result.statusCode).toBe(204)
+
+    const result2 = await request(app)
+      .get('/api/v1/logout')
+      .set('Authorization', `Bearer ${token}`)
+      .send()
+
+    expect(result2.body).toStrictEqual({
+      message: 'Invalid token by logout',
+      statusCode: 401,
+    })
   })
 })
