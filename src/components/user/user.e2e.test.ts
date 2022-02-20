@@ -2,7 +2,7 @@ import express from 'express'
 import request from 'supertest'
 
 import App from '../../app'
-import { startConnection, closeConnection } from '../../config'
+import { DBConnection } from '../../config'
 
 import Factory from '../../helpers/factory'
 import startFactory from '../../utils/factories'
@@ -11,11 +11,13 @@ import truncate from '../../helpers/truncate'
 
 describe('POST /users', () => {
   let app: express.Application
-
+  let connection: DBConnection
   let factory: Factory
 
   beforeEach(async () => {
-    await startConnection()
+    connection = new DBConnection()
+
+    await connection.start()
 
     app = new App().init()
 
@@ -26,7 +28,7 @@ describe('POST /users', () => {
 
   afterEach(async () => {
     await truncate()
-    await closeConnection()
+    await connection.close()
   })
 
   test('should return a bad request', async () => {
@@ -52,11 +54,13 @@ describe('POST /users', () => {
 
 describe('GET /users', () => {
   let app: express.Application
-
+  let connection: DBConnection
   let factory: Factory
 
   beforeEach(async () => {
-    await startConnection()
+    connection = new DBConnection()
+
+    await connection.start()
 
     app = new App().init()
 
@@ -67,7 +71,7 @@ describe('GET /users', () => {
 
   afterEach(async () => {
     await truncate()
-    await closeConnection()
+    await connection.close()
   })
 
   test('should return no users', async () => {
@@ -92,11 +96,13 @@ describe('GET /users', () => {
 
 describe('GET /users/:id', () => {
   let app: express.Application
-
+  let connection: DBConnection
   let factory: Factory
 
   beforeEach(async () => {
-    await startConnection()
+    connection = new DBConnection()
+
+    await connection.start()
 
     app = new App().init()
 
@@ -107,7 +113,7 @@ describe('GET /users/:id', () => {
 
   afterEach(async () => {
     await truncate()
-    await closeConnection()
+    await connection.close()
   })
 
   test('should return not found', async () => {
@@ -129,7 +135,7 @@ describe('GET /users/:id', () => {
 
 describe('DELETE /users/:id', () => {
   let app: express.Application
-
+  let connection: DBConnection
   let factory: Factory
 
   const shouldMakeLogin = async (email: string, password: string) => {
@@ -144,7 +150,9 @@ describe('DELETE /users/:id', () => {
   }
 
   beforeEach(async () => {
-    await startConnection()
+    connection = new DBConnection()
+
+    await connection.start()
 
     app = new App().init()
 
@@ -155,7 +163,7 @@ describe('DELETE /users/:id', () => {
 
   afterEach(async () => {
     await truncate()
-    await closeConnection()
+    await connection.close()
   })
 
   test('should return not found', async () => {

@@ -2,7 +2,7 @@ import express from 'express'
 import request from 'supertest'
 
 import App from '../../app'
-import { startConnection, closeConnection } from '../../config'
+import { DBConnection } from '../../config'
 
 import Factory from '../../helpers/factory'
 import startFactory from '../../utils/factories'
@@ -11,7 +11,7 @@ import truncate from '../../helpers/truncate'
 
 describe('POST /logout', () => {
   let app: express.Application
-
+  let connection: DBConnection
   let factory: Factory
 
   const shouldMakeLogin = async (email: string, password: string) => {
@@ -26,7 +26,9 @@ describe('POST /logout', () => {
   }
 
   beforeEach(async () => {
-    await startConnection()
+    connection = new DBConnection()
+
+    await connection.start()
 
     app = new App().init()
 
@@ -37,7 +39,7 @@ describe('POST /logout', () => {
 
   afterEach(async () => {
     await truncate()
-    await closeConnection()
+    await connection.close()
   })
 
   test('should realize the logout', async () => {

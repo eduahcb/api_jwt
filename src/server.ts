@@ -1,8 +1,10 @@
 import App from './app'
-import { config, startConnection } from './config'
+import { config, DBConnection } from './config'
 
 const startServer = async (): Promise<void> => {
-  await startConnection()
+  const connection = new DBConnection()
+
+  await connection.start()
 
   const app = new App().init()
 

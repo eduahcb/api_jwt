@@ -1,3 +1,2 @@
 export { default as config } from './config'
-
-export { startConnection, closeConnection } from './connection'
+export { default as DBConnection } from './connection'

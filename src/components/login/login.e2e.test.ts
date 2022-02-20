@@ -2,7 +2,7 @@ import express from 'express'
 import request from 'supertest'
 
 import App from '../../app'
-import { startConnection, closeConnection } from '../../config'
+import { DBConnection } from '../../config'
 
 import Factory from '../../helpers/factory'
 import startFactory from '../../utils/factories'
@@ -11,11 +11,13 @@ import truncate from '../../helpers/truncate'
 
 describe('POST /login', () => {
   let app: express.Application
-
+  let connection: DBConnection
   let factory: Factory
 
   beforeEach(async () => {
-    await startConnection()
+    connection = new DBConnection()
+
+    await connection.start()
 
     app = new App().init()
 
@@ -26,7 +28,7 @@ describe('POST /login', () => {
 
   afterEach(async () => {
     await truncate()
-    await closeConnection()
+    await connection.close()
   })
 
   test('should realize the login', async () => {
