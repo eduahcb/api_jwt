@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 
-import { HttpStatusCode } from './../helpers/HttpStatusCode'
-import { UnauthorizeException, HttpException } from '../exceptions'
+import { HttpStatusCode } from '@/helpers/HttpStatusCode'
+import { UnauthorizeException, HttpException } from '@/exceptions'
 
 import passport from 'passport'
 

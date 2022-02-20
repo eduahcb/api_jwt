@@ -1,4 +1,4 @@
-import { HttpStatusCode } from './../helpers/HttpStatusCode'
+import { HttpStatusCode } from '@/helpers/HttpStatusCode'
 
 class UnauthorizedException extends Error {
   public statusCode: number

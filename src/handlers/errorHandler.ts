@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import Youch from 'youch'
 
-import { config, rollbar } from '../config'
+import { config, rollbar } from '@/config'
 
 class ErrorHandler {
   private error: any

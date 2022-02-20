@@ -1,13 +1,13 @@
 import express from 'express'
 import request from 'supertest'
 
-import App from '../../app'
-import { DBConnection } from '../../config'
+import App from '@/app'
+import { DBConnection } from '@/config'
 
-import Factory from '../../helpers/factory'
-import startFactory from '../../utils/factories'
+import Factory from '@/helpers/factory'
+import startFactory from '@/utils/factories'
 
-import truncate from '../../helpers/truncate'
+import truncate from '@/helpers/truncate'
 
 describe('POST /login', () => {
   let app: express.Application

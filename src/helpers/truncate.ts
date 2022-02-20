@@ -1,6 +1,6 @@
 import { getConnection } from 'typeorm'
 
-import RedisConnection from '../config/redis/connection'
+import RedisConnection from '@/config/redis/connection'
 
 const truncatePostgres = async () => {
   const connection = getConnection()

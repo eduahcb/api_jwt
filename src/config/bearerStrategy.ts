@@ -7,7 +7,7 @@ import { Strategy as BearerStrategy } from 'passport-http-bearer'
 import config from './config'
 import blockList from './redis/blockList'
 
-import User from '../components/user/user.entity'
+import User from '@/components/user/user.entity'
 
 type Payload = {
   id: string

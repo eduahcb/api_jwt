@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { getRepository, Repository } from 'typeorm'
-import { NotFoundException } from '../../exceptions'
+import { NotFoundException } from '@/exceptions'
 
 import User from './user.entity'
 import UserForm from './user.form'

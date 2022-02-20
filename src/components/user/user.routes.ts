@@ -3,7 +3,7 @@ import UserController from './user.controller'
 
 import userValidator from './user.validator'
 
-import bearerAuth from '../../middlewares/bearerAuth'
+import bearerAuth from '@/middlewares/bearerAuth'
 
 const userRouter = (): Router => {
   const userController = new UserController()

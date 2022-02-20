@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import { HttpException, UnauthorizeException } from '../exceptions'
+import { HttpException, UnauthorizeException } from '@/exceptions'
 
 import bearerAuth from './bearerAuth'
 

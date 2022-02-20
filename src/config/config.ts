@@ -29,6 +29,8 @@ const config = convict({
 
 const env = config.get('env')
 
-config.loadFile(`./src/environments/${env}.json`)
+const basePath = env === 'development' ? 'src' : 'build'
+
+config.loadFile(`./${basePath}/environments/${env}.json`)
 
 export default config

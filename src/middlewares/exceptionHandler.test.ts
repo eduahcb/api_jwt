@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 
 import exceptionHandler from './exceptionHandler'
 
-import { config } from '../config'
+import { config } from '@/config'
 
 describe('exceptionHandler', () => {
   let reqMock: Partial<Request>

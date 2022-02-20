@@ -1,4 +1,4 @@
-import { HttpStatusCode } from './../helpers/HttpStatusCode'
+import { HttpStatusCode } from '@/helpers/HttpStatusCode'
 
 class NotFoundException extends Error {
   public statusCode: number

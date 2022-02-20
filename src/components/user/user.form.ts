@@ -1,6 +1,6 @@
-import { HttpStatusCode } from './../../helpers/HttpStatusCode'
 import { Repository, getRepository } from 'typeorm'
-import { HttpException } from '../../exceptions'
+import { HttpStatusCode } from '@/helpers/HttpStatusCode'
+import { HttpException } from '@/exceptions'
 import User from './user.entity'
 
 class UserForm {
