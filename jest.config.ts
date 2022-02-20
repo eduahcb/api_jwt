@@ -27,6 +27,7 @@ export default {
     '!src/environments/**',
     '!src/database/**',
     '!src/config/config.ts',
+    '!src/components/**/*.swagger.ts',
   ],
 
   // The directory where Jest should output its coverage files
