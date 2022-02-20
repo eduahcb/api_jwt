@@ -12,9 +12,9 @@ jobs:
       - run: node --version
   eslint:
     steps:
-     - checkout
-     - node/install-packages:
-        pkg-manager: yarn
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
       - run:
           command: yarn lint
           name: RUN ESLINT  
