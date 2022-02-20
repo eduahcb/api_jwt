@@ -11,6 +11,9 @@ jobs:
           install-yarn: true
       - run: node --version
   eslint:
+    executor:
+      name: node/default
+      tag: '16'
     steps:
       - checkout
       - node/install-packages:
