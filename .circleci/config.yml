@@ -15,7 +15,7 @@ jobs:
   
   install-postgres:
     docker:
-      - image: 'cimg/postgres:12.9.0'
+      - image: 'cimg/postgres:12.0'
     steps:
       - checkout
       - run: sudo apt-get update
