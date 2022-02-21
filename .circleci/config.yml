@@ -12,19 +12,20 @@ jobs:
       - run: node --version
       - node/install-packages:
           pkg-manager: yarn
-  
   install-postgres:
     docker:
       - image: 'cimg/postgres:12.0'
     steps:
       - checkout
-      - run: sudo apt-get update
+      - run: echo "ok"
   eslint:
     executor:
       name: node/default
       tag: '16.4.0'
     steps:
       - checkout
+      - node/install-packages:
+          pkg-manager: yarn
       - run:
           command: yarn lint
           name: RUN ESLINT
@@ -34,6 +35,8 @@ jobs:
       tag: '16.4.0'
     steps:
       - checkout
+      - node/install-packages:
+          pkg-manager: yarn
       - run:
           command: yarn test
           name: RUN TESTS  
@@ -41,5 +44,4 @@ workflows:
   ci:
     jobs:
       - install-node
-      - install-postgres
       - eslint
