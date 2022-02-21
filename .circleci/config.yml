@@ -1,40 +1,53 @@
 version: 2.1
-orbs: 
-  node: circleci/node@5.0.0
+
+aliases:
+
+  - &restore-yarn-cache:
+    name: Restore yarnpkg cache
+    keys:
+      - yarn-packages-{{ checksum "yarn.lock" }}
+
+  - &save-node-modules-cache:
+    name: Save node_modules cache
+    paths:
+      - node_modules
+
+  - &save-yarn-cache
+    name: Save yarnpkg cache
+    key: yarn-packages-{{ checksum "yarn.lock" }}
+    paths:
+      - ~/.cache/yarn
+
+defaults: &defaults
+  docker:
+    - image: 'cimg/node:16.4.0'
+    - image: 'cimg/postgres:12.9'
+
 jobs:
-  development:
-    docker:
-      - image: 'cimg/node:16.4.0'
-      - image: 'cimg/postgres:12.9'
+  build_packages:
+    <<: *defaults
+
     steps:
       - checkout
+
+      - restore_cache: *restore-node-modules-cache
+      - restore_cache: *restore-yarn-cache
+
       - node/install:
-          install-yarn: true
+        install-yarn: true
       - run: node --version
       - node/install-packages:
           pkg-manager: yarn
+      - save_cache: *save-node-modules-cache
+      - save_cache: *save-yar-cache
+
+
   eslint:
-    executor:
-      name: node/default
-      tag: '16.4.0'
+
+    <<: *defaults
+    
     steps:
       - checkout
       - run:
           command: yarn lint
           name: RUN ESLINT
-  tests:
-    executor:
-      name: node/default
-      tag: '16.4.0'
-    steps:
-      - checkout
-      - run:
-          command: yarn test
-          name: RUN TESTS  
-workflows:
-  ci:
-    jobs:
-      - development
-      - eslint:
-          requires:
-            - development
