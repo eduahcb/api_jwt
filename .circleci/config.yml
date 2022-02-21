@@ -12,9 +12,15 @@ jobs:
       - run: node --version
       - node/install-packages:
           pkg-manager: yarn
+  
   install-postgres:
     docker:
       - image: 'cimg/postgres:12.0'
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          POSTGRES_USER: postgres
     steps:
       - checkout
       - run: echo "ok"
