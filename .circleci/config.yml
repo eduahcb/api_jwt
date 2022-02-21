@@ -20,8 +20,18 @@ jobs:
           pkg-manager: yarn
       - run:
           command: yarn lint
-          name: RUN ESLINT  
-
+          name: RUN ESLINT
+  tests:
+    executor:
+      name: node/default
+      tag: '16.4.0'
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - run:
+          command: yarn test
+          name: RUN TESTS  
 workflows:
   ci:
     jobs:
