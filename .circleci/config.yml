@@ -44,4 +44,5 @@ workflows:
   ci:
     jobs:
       - install-node
+      - install-postgres
       - eslint
