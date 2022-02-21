@@ -36,5 +36,5 @@ workflows:
     jobs:
       - development
       - eslint
-        requires
+        requires:
           - development
