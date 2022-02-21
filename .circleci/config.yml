@@ -35,6 +35,6 @@ workflows:
   ci:
     jobs:
       - development
-      - eslint
+      - eslint:
           requires:
             - development
