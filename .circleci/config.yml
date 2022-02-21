@@ -37,3 +37,4 @@ workflows:
     jobs:
       - install-node
       - eslint
+      - tests
