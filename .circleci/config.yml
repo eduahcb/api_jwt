@@ -36,7 +36,7 @@ defaults: &defaults
   docker:
     - image: 'cimg/node:16.4.0'
     - image: 'cimg/postgres:12.9'
-  working_directory: ./temp
+  working_directory: ./api_jwt
 
 jobs:
   build_packages:
@@ -62,7 +62,7 @@ jobs:
 
     steps:
       - attach_workspace:
-          at: ./temp
+          at: ./api_jwt
           
       - checkout
       - run:
