@@ -36,6 +36,19 @@ aliases:
 
 commands:
   databases:
+    docker:
+      - image: 'cimg/node:16.4.0'
+      - image: 'cimg/postgres:12.9'
+        auth:
+          username: eduahcb
+          password: $DOCKERHUB_PASSWORD
+        environment:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
+          POSTGRES_PASSWORD: 123
+          POSTGRES_USER: postgres
+          POSTGRES_DB: api_jwt
+          POSTGRES_HOST_AUTH_METHOD: fase
     steps:
       - run: sudo apt-get update
       - run: sudo apt-get install postgresql-client-12
@@ -43,17 +56,7 @@ commands:
 defaults: &defaults
   docker:
     - image: 'cimg/node:16.4.0'
-    - image: 'cimg/postgres:12.9'
-      auth:
-        username: eduahcb
-        password: $DOCKERHUB_PASSWORD
-      environment:
-        POSTGRES_HOST: localhost
-        POSTGRES_PORT: 5432
-        POSTGRES_PASSWORD: 123
-        POSTGRES_USER: postgres
-        POSTGRES_DB: api_jwt
-        POSTGRES_HOST_AUTH_METHOD: fase
+  working_directory: ~/workspace
 
 
 
@@ -61,7 +64,6 @@ jobs:
   build_packages:
     <<: *defaults
     
-    working_directory: ~/workspace
   
     steps:
 
@@ -97,8 +99,6 @@ jobs:
       - checkout
       - databases
 
-      working_directory: ~/workspace
-
       - attach_workspace:
           at: ~/workspace
 
@@ -113,6 +113,9 @@ workflows:
   ci:
     jobs:
       - build_packages
+      - eslint:
+          requires:
+            - build_packages
       - tests:
           requires:
             - build_packages
