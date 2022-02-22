@@ -54,7 +54,6 @@ defaults: &defaults
         POSTGRES_USER: postgres
         POSTGRES_DB: api_jwt
         POSTGRES_HOST_AUTH_METHOD: fase
-  working_directory: ~/workspace
 
 
 
@@ -62,6 +61,7 @@ jobs:
   build_packages:
     <<: *defaults
     
+    working_directory: ~/workspace
   
     steps:
 
@@ -97,6 +97,8 @@ jobs:
       - checkout
       - databases
 
+      working_directory: ~/workspace
+
       - attach_workspace:
           at: ~/workspace
 
@@ -111,9 +113,6 @@ workflows:
   ci:
     jobs:
       - build_packages
-      - eslint:
-          requires:
-            - build_packages
       - tests:
           requires:
             - build_packages
