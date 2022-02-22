@@ -45,7 +45,7 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
       - save_cache: *save-node-modules-cache
-      - save_cache: *save-yar-cache
+      - save_cache: *save-yarn-cache
 
 
   eslint:
