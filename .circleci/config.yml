@@ -22,7 +22,7 @@ aliases:
     name: Save yarnpkg cache
     key: yarn-packages-{{ checksum "yarn.lock" }}
     paths:
-      - ~/.cache/yarn
+      - .cache/yarn
 
 defaults: &defaults
   docker:
