@@ -22,7 +22,7 @@ aliases:
       - .cache/yarn 
 
   - &persist-workspace
-    root: "api_jwt"
+    root: "."
     paths:
       - ".eslintrc.json"
       - ".prettierrc"
@@ -49,26 +49,6 @@ jobs:
       - restore_cache: *restore-yarn-cache
 
       - run:
-          name: show the path before
-          command: pwd
-      
-      - run:
-          name: create api_jwt 
-          command: mkdir api_jwt
-        
-      - run:
-          name: show directories
-          command: ls
-
-      - run:
-          name: got o api_jwt
-          command: cd api_jwt
-          
-      - run:
-          name: show the path after
-          command: pwd
-
-      - run:
           name: Install Dependencies
           command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
       
@@ -83,7 +63,7 @@ jobs:
 
     steps:
       - attach_workspace:
-          at: ~/workspace/api_jwt
+          at: ~/workspace
           
       - checkout
       - run:
