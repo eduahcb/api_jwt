@@ -7,6 +7,12 @@ aliases:
     keys:
       - yarn-packages-{{ checksum "yarn.lock" }}
 
+
+  - &restore-node-modules-cache:
+    name: Restore node_modules
+    keys:
+      - yarn-packages-{{ checksum "yarn.lock" }}
+
   - &save-node-modules-cache:
     name: Save node_modules cache
     paths:
