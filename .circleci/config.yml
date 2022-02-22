@@ -13,13 +13,13 @@ aliases:
     name: Save node_modules cache
     key: yarn-packages-{{ checksum "yarn.lock" }}
     paths:
-      - node_modules
+      - api_jwt/node_modules
 
   - &save-yarn-cache
     name: Save yarnpkg cache
     key: v5-yarn-cache
     paths:
-      - .cache/yarn 
+      - api_jwat/.cache/yarn 
 
   - &persist-workspace
     root: "api_jwt"
