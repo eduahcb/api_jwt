@@ -54,7 +54,7 @@ jobs:
       
       - run:
           name: show the path
-          command: ls -ahl in /tmp
+          command: ls -ahl in ~/workspace
 
       - save_cache: *save-node-modules-cache
       - save_cache: *save-yarn-cache
