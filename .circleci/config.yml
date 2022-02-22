@@ -24,6 +24,7 @@ aliases:
   - &persist-workspace
     root: "."
     paths:
+      - ".git"
       - ".eslintrc.json"
       - ".prettierrc"
       - "jest.config.ts"
