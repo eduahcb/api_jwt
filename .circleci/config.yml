@@ -39,9 +39,6 @@ commands:
     steps:
       - run: sudo apt-get update
       - run: sudo apt-get install postgresql-client-12
-      - run: |
-          psql \
-          -c "show databases;"
 
 defaults: &defaults
   docker:
