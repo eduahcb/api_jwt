@@ -7,19 +7,19 @@ aliases:
 
   - &restore-node-modules-cache
     name: Restore node_modules
-    key: v5-yarn-deps-{{ checksum "yarn.lock" }}-{{ checksum "combined-package-lock.txt" }}
+    key: yarn-packages-{{ checksum "yarn.lock" }}
   
   - &save-node-modules-cache
     name: Save node_modules cache
-    key: v5-yarn-deps-{{ checksum "yarn.lock" }}-{{ checksum "combined-package-lock.txt" }}
+    key: yarn-packages-{{ checksum "yarn.lock" }}
     paths:
-      - /home/circleci/workspace/node_modules
+      - node_modules
 
   - &save-yarn-cache
     name: Save yarnpkg cache
     key: v5-yarn-cache
     paths:
-      - /home/circleci/workspace
+      - .cache/yarn 
 
   - &persist-workspace
     root: "api_jwt"
