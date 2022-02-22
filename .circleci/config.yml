@@ -39,13 +39,9 @@ commands:
     steps:
       - run: sudo apt-get update
       - run: sudo apt-get install postgresql-client-12
-      - run: whoami
       - run: |
           psql \
-          -c "create dabase api_jwt_dev"
-      - run: |
-          psql \
-          -c "show dabases;"
+          -c "show databases;"
 
 defaults: &defaults
   docker:
@@ -54,6 +50,9 @@ defaults: &defaults
       auth:
         username: eduahcb
         password: $DOCKERHUB_PASSWORD
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_DB: api_jwt
   working_directory: ~/workspace
 
 
@@ -108,5 +107,8 @@ workflows:
     jobs:
       - build_packages
       - eslint:
+          requires:
+            - build_packages
+      - tests:
           requires:
             - build_packages
