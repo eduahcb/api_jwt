@@ -94,18 +94,17 @@ jobs:
       - run:
           name: Run Eslint
           command:  yarn eslint 
-
-      - databases
   tests:
     <<: *defaults
 
     steps:
+      - checkout
+      - databases
+
       - attach_workspace:
           at: ~/workspace
       
-      - checkout
 
-      - databases
 workflows:
   ci:
     jobs:
