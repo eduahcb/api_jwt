@@ -3,21 +3,21 @@ version: 2.1
 aliases:
   - &restore-yarn-cache
     name: Restore yarnpkg cache
-    key: yarn-packages-{{ checksum "yarn.lock" }}
+    key: v5-yarn-cache 
 
   - &restore-node-modules-cache
     name: Restore node_modules
-    key: yarn-packages-{{ checksum "yarn.lock" }}
+    key: v5-yarn-deps-{{ checksum "yarn.lock" }}-{{ checksum "combined-package-lock.txt" }}
   
   - &save-node-modules-cache
     name: Save node_modules cache
-    key: yarn-packages-{{ checum "yarn.lock" }}
+    key: v5-yarn-deps-{{ checksum "yarn.lock" }}-{{ checksum "combined-package-lock.txt" }}
     paths:
       - node_modules
 
   - &save-yarn-cache
     name: Save yarnpkg cache
-    key: yarn-packages-{{ checksum "yarn.lock" }}
+    key: v5-yarn-cache
     paths:
       - ~/.cache/yarn
       
