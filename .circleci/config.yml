@@ -32,6 +32,7 @@ aliases:
       - "tsconfig.json"
       - "yarn.lock"
       - "tmp/*"
+      - "node_modules"
 
 
 defaults: &defaults
