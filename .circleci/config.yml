@@ -36,8 +36,8 @@ jobs:
       - restore_cache: *restore-yarn-cache
 
       - run:
-          name: Install yarn
-          command: yarn install
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
 
       - save_cache: *save-node-modules-cache
       - save_cache: *save-yarn-cache
