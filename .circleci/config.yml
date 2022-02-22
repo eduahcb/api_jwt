@@ -68,8 +68,8 @@ jobs:
           
       - checkout
       - run:
-          name: R
-          command: ls -la
+          name: Run Eslint
+          command:  yarn eslint 
 
 workflows:
   ci:
