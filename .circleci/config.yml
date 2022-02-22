@@ -59,7 +59,7 @@ jobs:
 workflows:
   ci:
     jobs:
-      - development
+      - build_packages
       - eslint:
           requires:
-            - development
+            - build_packages
