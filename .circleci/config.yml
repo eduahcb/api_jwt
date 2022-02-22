@@ -17,6 +17,7 @@ aliases:
 
   - &save-node-modules-cache
     name: Save node_modules cache
+    key: v5-node-modules
     paths:
       - node_modules
 
