@@ -61,15 +61,14 @@ jobs:
 
     <<: *defaults
 
-
     steps:
       - attach_workspace:
           at: ~/workspace
           
       - checkout
       - run:
-          command: yarn lint
-          name: RUN ESLINT
+          name: R
+          command: cat ~/workspace/package.json
 
 workflows:
   ci:
