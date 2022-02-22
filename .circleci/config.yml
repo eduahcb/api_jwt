@@ -1,12 +1,11 @@
 version: 2.1
 
 aliases:
-
   - &restore-yarn-cache:
     name: Restore yarnpkg cache
     keys:
       - yarn-packages-{{ checksum "yarn.lock" }}
-      
+
   - &restore-node-modules-cache:
     name: Restore node_modules
     keys:
@@ -17,11 +16,11 @@ aliases:
     paths:
       - node_modules
 
-  - &save-yarn-cache
+  - &save-yarn-cache:
     name: Save yarnpkg cache
     key: yarn-packages-{{ checksum "yarn.lock" }}
     paths:
-      - .cache/yarn
+      - ~/.cache/yarn
 
 defaults: &defaults
   docker:
