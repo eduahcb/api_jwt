@@ -51,8 +51,10 @@ defaults: &defaults
         username: eduahcb
         password: $DOCKERHUB_PASSWORD
       environment:
+        POSTGRES_GHOST: localhost
         POSTGRES_USER: postgres
         POSTGRES_DB: api_jwt
+        POSTGRES_HOST_AUTH_METHOD: fase
   working_directory: ~/workspace
 
 
