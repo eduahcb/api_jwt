@@ -34,6 +34,18 @@ aliases:
       - "tmp/*"
       - "node_modules"
 
+commands:
+  databases:
+    steps:
+      - run: sudo apt-get update
+      - run: sudo apt-get install postgresql-client-12
+      - run: whoami
+      - run: |
+          psql \
+          -c "create dabase api_jwt_dev"
+      - run: |
+          psql \
+          -c "show dabases;"
 
 defaults: &defaults
   docker:
@@ -44,11 +56,16 @@ defaults: &defaults
         password: $DOCKERHUB_PASSWORD
   working_directory: ~/workspace
 
+
+
 jobs:
   build_packages:
     <<: *defaults
+    
+   
 
     steps:
+
       - checkout
       - restore_cache: *restore-node-modules-cache
       - restore_cache: *restore-yarn-cache
@@ -60,6 +77,7 @@ jobs:
       - save_cache: *save-node-modules-cache
       - save_cache: *save-yarn-cache
       - persist_to_workspace: *persist-workspace
+
 
   eslint:
 
@@ -74,6 +92,17 @@ jobs:
           name: Run Eslint
           command:  yarn eslint 
 
+      - databases
+  tests:
+    <<: *defaults
+
+    steps:
+      - attach_workspace:
+          at: ~/workspace
+      
+      - checkout
+
+      - databases
 workflows:
   ci:
     jobs:
