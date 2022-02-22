@@ -53,6 +53,7 @@ defaults: &defaults
       environment:
         POSTGRES_HOST: localhost
         POSTGRES_PORT: 5432
+        POSTGRES_PASSWORD: 123
         POSTGRES_USER: postgres
         POSTGRES_DB: api_jwt
         POSTGRES_HOST_AUTH_METHOD: fase
