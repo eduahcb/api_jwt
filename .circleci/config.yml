@@ -30,6 +30,7 @@ aliases:
       - "package.json"
       - "tsconfig.json"
       - "yarn.lock"
+      - "tmp/*"
 
 
 defaults: &defaults
