@@ -54,10 +54,18 @@ jobs:
       
       - run:
           name: create api_jwt 
-          command: mkdir api_jwt && cd api_jwt
+          command: mkdir api_jwt
+        
+      - run:
+          name: show directories
+          command: ls
 
       - run:
-          name: show the path before
+          name: got o api_jwt
+          command: cd api_jwt
+          
+      - run:
+          name: show the path after
           command: pwd
 
       - run:
