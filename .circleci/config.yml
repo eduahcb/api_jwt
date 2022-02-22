@@ -22,7 +22,7 @@ aliases:
       - ~/.cache/yarn
 
   - &persist-workspace
-    root: "."
+    root: "api_jwt"
     paths:
       - ".eslintrc.json"
       - ".prettierrc"
@@ -37,7 +37,7 @@ defaults: &defaults
   docker:
     - image: 'cimg/node:16.4.0'
     - image: 'cimg/postgres:12.9'
-  working_directory: /api_jwt
+  working_directory: ~/workspace
 
 jobs:
   build_packages:
@@ -51,6 +51,10 @@ jobs:
       - run:
           name: Install Dependencies
           command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+      
+      - run:
+          name: create paste
+          command: mkdir api_jwt
 
       - save_cache: *save-node-modules-cache
       - save_cache: *save-yarn-cache
@@ -63,7 +67,7 @@ jobs:
 
     steps:
       - attach_workspace:
-          at: /api_jwt
+          at: ~/workspace/api_jwt
           
       - checkout
       - run:
