@@ -45,9 +45,17 @@ jobs:
   eslint:
 
     <<: *defaults
-    
+
     steps:
       - checkout
       - run:
           command: yarn lint
           name: RUN ESLINT
+
+workflows:
+  ci:
+    jobs:
+      - development
+      - eslint:
+          requires:
+            - development
