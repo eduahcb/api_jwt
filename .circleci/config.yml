@@ -13,13 +13,13 @@ aliases:
     name: Save node_modules cache
     key: v5-yarn-deps-{{ checksum "yarn.lock" }}-{{ checksum "combined-package-lock.txt" }}
     paths:
-      - node_modules
+      - /home/circleci/workspace/node_modules
 
   - &save-yarn-cache
     name: Save yarnpkg cache
     key: v5-yarn-cache
     paths:
-      - ~/.cache/yarn
+      - /home/circleci/workspace
 
   - &persist-workspace
     root: "api_jwt"
