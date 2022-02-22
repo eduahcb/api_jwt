@@ -100,6 +100,10 @@ jobs:
           at: ~/workspace
       
       - databases
+
+      - run:
+          name: start
+          command: pg_ctl -D /var/lib/postgresql/data -l logfile start
       
       - run:
           name: run migrations
@@ -108,24 +112,6 @@ jobs:
       - run:
           name: Run tests
           command: yarn test
-
-  uai:
-    docker:
-    - image: 'cimg/node:16.4.0'
-    - image: 'cimg/postgres:12.9'
-      auth:
-        username: eduahcb
-        password: $DOCKERHUB_PASSWORD
-      environment:
-        POSTGRES_HOST: localhost
-        POSTGRES_PORT: 5432
-        POSTGRES_PASSWORD: 123
-        POSTGRES_USER: postgres
-        POSTGRES_DB: api_jwt_test
-        POSTGRES_HOST_AUTH_METHOD: true
-    steps:
-      - checkout
-      - databases
 
 workflows:
   ci:
@@ -137,4 +123,3 @@ workflows:
       - tests:
           requires:
             - build_packages
-      - uai
