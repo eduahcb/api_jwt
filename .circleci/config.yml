@@ -35,9 +35,9 @@ jobs:
       - restore_cache: *restore-node-modules-cache
       - restore_cache: *restore-yarn-cache
 
-      run:
-        name: Install yarn
-        command: yarn install
+      - run:
+          name: Install yarn
+          command: yarn install
 
       - save_cache: *save-node-modules-cache
       - save_cache: *save-yarn-cache
