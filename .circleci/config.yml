@@ -36,19 +36,6 @@ aliases:
 
 commands:
   databases:
-    docker:
-      - image: 'cimg/node:16.4.0'
-      - image: 'cimg/postgres:12.9'
-        auth:
-          username: eduahcb
-          password: $DOCKERHUB_PASSWORD
-        environment:
-          POSTGRES_HOST: localhost
-          POSTGRES_PORT: 5432
-          POSTGRES_PASSWORD: 123
-          POSTGRES_USER: postgres
-          POSTGRES_DB: api_jwt
-          POSTGRES_HOST_AUTH_METHOD: fase
     steps:
       - run: sudo apt-get update
       - run: sudo apt-get install postgresql-client-12
@@ -56,6 +43,17 @@ commands:
 defaults: &defaults
   docker:
     - image: 'cimg/node:16.4.0'
+    - image: 'cimg/postgres:12.9'
+      auth:
+        username: eduahcb
+        password: $DOCKERHUB_PASSWORD
+      environment:
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
+        POSTGRES_PASSWORD: 123
+        POSTGRES_USER: postgres
+        POSTGRES_DB: api_jwt_test
+        POSTGRES_HOST_AUTH_METHOD: false
   working_directory: ~/workspace
 
 
@@ -97,11 +95,12 @@ jobs:
 
     steps:
       - checkout
-      - databases
 
       - attach_workspace:
           at: ~/workspace
-
+      
+      - databases
+      
       - run:
           name: run migrations
           command: yarn typeorm migration:run      
