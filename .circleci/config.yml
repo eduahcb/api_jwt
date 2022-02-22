@@ -97,10 +97,6 @@ jobs:
       - checkout
       - databases
 
-      - run:
-          name: Waiting for Postgres to be ready
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-      
       - attach_workspace:
           at: ~/workspace
 
