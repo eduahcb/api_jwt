@@ -39,6 +39,9 @@ defaults: &defaults
   docker:
     - image: 'cimg/node:16.4.0'
     - image: 'cimg/postgres:12.9'
+      auth:
+        username: eduahcb
+        password: $DOCKERHUB_PASSWORD
   working_directory: ~/workspace
 
 jobs:
