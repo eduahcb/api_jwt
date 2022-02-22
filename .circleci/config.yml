@@ -68,7 +68,7 @@ jobs:
       - checkout
       - run:
           name: R
-          command: cat ~/workspace/package.json
+          command: ls -la
 
 workflows:
   ci:
