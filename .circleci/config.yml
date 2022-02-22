@@ -1,26 +1,26 @@
 version: 2.1
 
-aliases:
-  - &restore-yarn-cache:
-    name: Restore yarnpkg cache
-    keys:
-      - yarn-packages-{{ checksum "yarn.lock" }}
+# aliases:
+#   - &restore-yarn-cache:
+#     name: Restore yarnpkg cache
+#     keys:
+#       - yarn-packages-{{ checksum "yarn.lock" }}
 
-  - &restore-node-modules-cache:
-    name: Restore node_modules
-    keys:
-      - yarn-packages-{{ checksum "yarn.lock" }}
+#   - &restore-node-modules-cache:
+#     name: Restore node_modules
+#     keys:
+#       - yarn-packages-{{ checksum "yarn.lock" }}
 
-  - &save-node-modules-cache:
-    name: Save node_modules cache
-    paths:
-      - node_modules
+#   - &save-node-modules-cache:
+#     name: Save node_modules cache
+#     paths:
+#       - node_modules
 
-  - &save-yarn-cache:
-    name: Save yarnpkg cache
-    key: yarn-packages-{{ checksum "yarn.lock" }}
-    paths:
-      - ~/.cache/yarn
+#   - &save-yarn-cache:
+#     name: Save yarnpkg cache
+#     key: yarn-packages-{{ checksum "yarn.lock" }}
+#     paths:
+#       - ~/.cache/yarn
 
 defaults: &defaults
   docker:
@@ -31,19 +31,19 @@ jobs:
   build_packages:
     <<: *defaults
 
-    steps:
-      - checkout
+    # steps:
+    #   - checkout
 
-      # - restore_cache: *restore-node-modules-cache
-      # - restore_cache: *restore-yarn-cache
+    #   # - restore_cache: *restore-node-modules-cache
+    #   # - restore_cache: *restore-yarn-cache
 
-      - node/install:
-        install-yarn: true
-      - run: node --version
-      - node/install-packages:
-          pkg-manager: yarn
-      # - save_cache: *save-node-modules-cache
-      # - save_cache: *save-yarn-cache
+    #   - node/install:
+    #     install-yarn: true
+    #   - run: node --version
+    #   - node/install-packages:
+    #       pkg-manager: yarn
+    #   # - save_cache: *save-node-modules-cache
+    #   # - save_cache: *save-yarn-cache
 
 
   eslint:
