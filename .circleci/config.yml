@@ -20,11 +20,23 @@ aliases:
     key: v5-yarn-cache
     paths:
       - ~/.cache/yarn
-      
+
+  - &persist-workspace
+    root: "."
+    paths:
+      - ".eslintrc.json"
+      - ".prettierrc"
+      - "jest.config.ts"
+      - "package.json"
+      - "tsconfig.json"
+      - "yarn.lock"
+
+
 defaults: &defaults
   docker:
     - image: 'cimg/node:16.4.0'
     - image: 'cimg/postgres:12.9'
+  working_directory: ./temp
 
 jobs:
   build_packages:
@@ -41,12 +53,17 @@ jobs:
 
       - save_cache: *save-node-modules-cache
       - save_cache: *save-yarn-cache
+      - persist_to_workspace: *persist-workspace
 
   eslint:
 
     <<: *defaults
 
+
     steps:
+      - attach_workspace:
+          at: ./temp
+          
       - checkout
       - run:
           command: yarn lint
