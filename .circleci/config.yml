@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   node: circleci/node@5.0.0
-
+  codecov: codecov/codecov@3.2.2
 
 defaults: &defaults
   docker:
@@ -56,7 +56,10 @@ jobs:
       - run:
           name: "Run test"
           command: yarn cov
-  
+
+      - codecov/upload:
+          file: coverage/*.json
+          
 workflows:
   ci:
     jobs:
