@@ -42,6 +42,17 @@ jobs:
       - run:
           name: "Run lint"
           command: yarn lint
+
+
+  test:
+    <<: *defaults
+
+    steps:
+      - checkout
+
+      - node/test:
+          test-results-for: jest
+  
 workflows:
   ci:
     jobs:
