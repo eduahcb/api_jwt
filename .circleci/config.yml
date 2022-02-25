@@ -29,8 +29,6 @@ jobs:
     steps:
       - checkout
       
-      - node/install:
-          install-yarn: true
       - node/install-packages:
           pkg-manager: yarn
 
