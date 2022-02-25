@@ -66,6 +66,7 @@
   "scripts": {
     "dev": "tsnd --respawn --inspect=4321 --transpile-only -r tsconfig-paths/register src/server.ts",
     "build": "yarn tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./build",
+    "prestart": "yarn typeorm migration:run",
     "start": "node build/server.js",
     "test": "jest --coverage=false --watchAll=true -i",
     "cov": "jest --coverage --watchAll=false -i",
