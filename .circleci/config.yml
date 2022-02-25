@@ -7,7 +7,14 @@ orbs:
 defaults: &defaults
   docker:
     - image: cimg/node:16.13.1
-
+    - image: cimg/redis:6.2.6
+    - image: cimg/postgres:12.9
+      auth:
+        username: eduahcb
+        password: &DOCKERHUB_PASSWORD
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_DB: api_jwt_dev
 jobs:
   build:
     <<: *defaults
