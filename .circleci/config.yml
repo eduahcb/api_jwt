@@ -1,0 +1,28 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@5.0.0
+
+defaults: &defaults
+  docker:
+    - image: cimg/node:16.13.1
+
+jobs:
+  build:
+    <<: *defaults
+
+    steps:
+      - checkout
+      - node/install:
+          install-yarn: true
+      - node/install-packages:
+          cache-path: /workspace
+          pkg-manager: yarn
+
+      - run:
+          name: "Yarn Version"
+          command: yarn --version
+workflows:
+  ci:
+    jobs:
+      - build
