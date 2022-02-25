@@ -11,7 +11,7 @@ defaults: &defaults
     - image: cimg/postgres:12.9
       auth:
         username: eduahcb
-        password: &DOCKERHUB_PASSWORD
+        password: $DOCKERHUB_PASSWORD
       environment:
         POSTGRES_USER: postgres
         POSTGRES_DB: api_jwt_dev
