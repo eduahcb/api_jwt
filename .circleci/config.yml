@@ -16,7 +16,6 @@ jobs:
       - node/install:
           install-yarn: true
       - node/install-packages:
-          cache-path: /workspace
           pkg-manager: yarn
 
       - run:
