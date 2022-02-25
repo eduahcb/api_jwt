@@ -1,0 +1,11 @@
+.vscode
+@types
+coverage
+node_modules
+.editorconfig
+.env
+.env.example
+.eslintrc.json
+.gitignore
+.prettierrc
+.jest.config.ts

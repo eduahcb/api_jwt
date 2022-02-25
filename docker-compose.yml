@@ -1,0 +1,44 @@
+version: '3.8'
+services:
+  redis:
+    image: redis
+    container_name: api_jwt_redis
+    networks:
+      - api_jwt_network
+  
+  postgres:
+    image: postgres:12.9
+    restart: always
+    container_name: api_jwt_postgres
+    environment:
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=api_jwt_dev
+    networks:
+      - api_jwt_network
+  
+  web:
+    build: .
+    container_name: api_jwt
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=development
+      - PORT=8080
+      - TYPEORM_CONNECTION=postgres
+      - TYPEORM_HOST=postgres
+      - TYPEORM_PORT=5432
+      - TYPEORM_USERNAME=postgres
+      - TYPEORM_PASSWORD=123
+      - TYPEORM_DATABASE=api_jwt_dev
+      - TYPEORM_MIGRATIONS=build/database/migrations/*.js
+      - TYPEORM_ENTITIES=build/components/**/*.entity.js
+    entrypoint: yarn start
+    networks:
+      - api_jwt_network
+    depends_on:
+      - "redis"
+      - "postgres"
+networks:
+  api_jwt_network:
+    driver: bridge
