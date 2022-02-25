@@ -32,6 +32,7 @@ jobs:
           install-yarn: true
       - node/install-packages:
           pkg-manager: yarn
+          cache-path: ~/api_jwt/node_modules
 
       - run:
           name: "Yarn Version"
