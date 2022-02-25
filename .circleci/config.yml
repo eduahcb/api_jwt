@@ -32,7 +32,7 @@ jobs:
           install-yarn: true
       - node/install-packages:
           pkg-manager: yarn
-          cache-path: ~/api_jwt/node_modules
+          cache-path: ~/api_jwt
 
       - run:
           name: "Yarn Version"
@@ -51,7 +51,7 @@ jobs:
       
       - run:
           name: Run Lint
-          command: ls -la 
+          command: yarn lint 
 workflows:
   ci:
     jobs:
