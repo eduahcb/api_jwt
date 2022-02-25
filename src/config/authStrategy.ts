@@ -2,9 +2,9 @@ import passport from 'passport'
 import { getRepository } from 'typeorm'
 import { Strategy as LocalStrategy } from 'passport-local'
 
-import { UnauthorizeException, NotFoundException } from '@/exceptions'
+import { UnauthorizeException, NotFoundException } from '@src/exceptions'
 
-import User from '@/components/user/user.entity'
+import User from '@src/components/user/user.entity'
 
 import bcrypt from 'bcrypt'
 

@@ -1,5 +1,5 @@
 import User from './user.entity'
-import UserForm from './user.form'
+import UserForm from './user.dto'
 
 jest.mock('typeorm', () => ({
   ...jest.requireActual('typeorm'),

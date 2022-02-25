@@ -1,8 +1,8 @@
 import { Router } from 'express'
 
-import { loginRouter } from '@/components/login'
-import { logoutRouter } from '@/components/logout'
-import { userRouter } from '@/components/user'
+import { loginRouter } from '@src/components/login'
+import { logoutRouter } from '@src/components/logout'
+import { userRouter } from '@src/components/user'
 
 import { apiBaseUrl } from './config/constants/constants'
 

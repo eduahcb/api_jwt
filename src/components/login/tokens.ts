@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 
-import { config } from '@/config'
+import { config } from '@src/config'
 
 class Token {
   static createAccessToken = ({ id }: { id: string }): string => {

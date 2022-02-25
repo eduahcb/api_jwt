@@ -29,7 +29,7 @@ const config = convict({
 
 const env = config.get('env')
 
-const basePath = env === 'development' ? 'src' : 'build'
+const basePath = env === 'development' || env === 'test' ? 'src' : 'build'
 
 config.loadFile(`./${basePath}/environments/${env}.json`)
 

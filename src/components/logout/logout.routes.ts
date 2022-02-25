@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import LogoutController from './logout.controller'
 
-import bearerAuth from '@/middlewares/bearerAuth'
+import bearerAuth from '@src/middlewares/bearerAuth'
 
 const logoutRouter = (): Router => {
   const logoutController = new LogoutController()

@@ -1,9 +1,9 @@
 import { Request, Response } from 'express'
 import { getRepository, Repository } from 'typeorm'
-import { NotFoundException } from '@/exceptions'
+import { NotFoundException } from '@src/exceptions'
 
 import User from './user.entity'
-import UserForm from './user.form'
+import UserForm from './user.dto'
 import UserResponse from './user.response'
 
 class UserController {

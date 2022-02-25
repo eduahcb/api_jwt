@@ -1,4 +1,4 @@
-import { HttpStatusCode } from '@/helpers/HttpStatusCode'
+import { HttpStatusCode } from '@src/helpers/HttpStatusCode'
 import HttpException from './HttpException'
 
 describe('HttpException', () => {
