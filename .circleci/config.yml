@@ -3,20 +3,6 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.0
 
-aliases:
-
-  - &persist-workspace
-    root: "."
-    paths:
-      - "node_modules"
-      - "src"
-      - ".env"
-      - "eslintrc.json"
-      - ".prettierrc"
-      - "jest.config.ts"
-      - "package.json"
-      - "tsconfig.json"
-      - ".yarn.lock"
 
 defaults: &defaults
   docker:
@@ -32,13 +18,10 @@ jobs:
           install-yarn: true
       - node/install-packages:
           pkg-manager: yarn
-          cache-path: ~/api_jwt
 
       - run:
           name: "Yarn Version"
           command: yarn --version
-
-      - persist_to_workspace: *persist-workspace
 
   lint:
     <<: *defaults
@@ -46,12 +29,14 @@ jobs:
     steps:
       - checkout
       
-      - attach_workspace:
-          at: ~/api_jwt
-      
+      - node/install:
+          install-yarn: true
+      - node/install-packages:
+          pkg-manager: yarn
+
       - run:
-          name: Run Lint
-          command: yarn lint 
+          name: "Run lint"
+          command: yarn lint
 workflows:
   ci:
     jobs:
