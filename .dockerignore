@@ -1,11 +1,13 @@
 .vscode
-@types
 coverage
 node_modules
-.editorconfig
+build
 .env
 .env.example
-.eslintrc.json
+.git
 .gitignore
+.editorconfig
+.eslintrc
 .prettierrc
-.jest.config.ts
+.circleci
+.codeclimate.yml
