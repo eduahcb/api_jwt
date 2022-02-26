@@ -32,6 +32,6 @@ checks:
       threshold: # language-specific defaults. an override will affect all languages.
 
 exclude_patters:
-  - "node_modules"
-  - "src/database"
-  - "src/components/**/*.ts"
+  - "node_modules/**/*"
+  - "src/database/**/*"
+  - "src/components/**/*.test.ts"
