@@ -17,9 +17,11 @@ services:
     networks:
       - api_jwt_network
   
-  web:
-    build: .
-    container_name: api_jwt
+  api:
+    image: eduahcb/api_jwt
+    container_name: api
+    expose:
+      - 8080
     ports:
       - "8080:8080"
     environment:
@@ -33,6 +35,7 @@ services:
       - TYPEORM_DATABASE=api_jwt_dev
       - TYPEORM_MIGRATIONS=build/database/migrations/*.js
       - TYPEORM_ENTITIES=build/components/**/*.entity.js
+    command: yarn typeorm migration:run
     entrypoint: yarn start
     networks:
       - api_jwt_network

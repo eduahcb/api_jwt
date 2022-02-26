@@ -2,8 +2,12 @@
 coverage
 node_modules
 build
-.editorconfig
-.eslintrc.json
+.env
+.env.example
+.git
 .gitignore
+.editorconfig
+.eslintrc
 .prettierrc
-.jest.config.ts
+.circleci
+.codeclimate.yml
