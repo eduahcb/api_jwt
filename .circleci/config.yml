@@ -1,0 +1,72 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@5.0.0
+  codecov: codecov/codecov@3.2.2
+
+defaults: &defaults
+  docker:
+    - image: cimg/node:16.13.1
+    - image: cimg/redis:6.2.6
+    - image: cimg/postgres:12.9
+      auth:
+        username: eduahcb
+        password: $DOCKERHUB_PASSWORD
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_DB: api_jwt_dev
+jobs:
+  build:
+    <<: *defaults
+
+    steps:
+      - checkout
+      - node/install:
+          install-yarn: true
+      - node/install-packages:
+          pkg-manager: yarn
+
+      - run:
+          name: "Yarn Version"
+          command: yarn --version
+
+  lint:
+    <<: *defaults
+    
+    steps:
+      - checkout
+      
+      - node/install-packages:
+          pkg-manager: yarn
+
+      - run:
+          name: "Run lint"
+          command: yarn lint
+
+
+  test:
+    <<: *defaults
+
+    steps:
+      - checkout
+
+      - node/install-packages:
+          pkg-manager: yarn
+
+      - run:
+          name: "Run test"
+          command: yarn cov
+
+      - codecov/upload:
+          file: coverage/*.json
+          
+workflows:
+  ci:
+    jobs:
+      - build
+      - lint:
+          requires:
+            - build
+      - test:
+          requires:
+            - build
