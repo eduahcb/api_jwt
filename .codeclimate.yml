@@ -4,10 +4,10 @@ plugins:
   duplication:
     enabled: true
     exclude_patters:
-      - src/database/*
       - src/components/**/*.test.ts
 
 exclude_patters:
+  - src/database/*
   - build/**/*
   - coverage/**
   - node_modules/**/*
