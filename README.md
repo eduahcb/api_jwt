@@ -1,6 +1,6 @@
-<h1 style="text-align: center;">API JWT</h1>
+<h1 align="center">API JWT</h1>
 
-<h2 style="text-align: center;">API to learn some techs</h2>
+<h2  align="center">API to learn some techs</h2>
 
 <p align="center" style="font-size: 18px;">
   <a href="#project">Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -9,21 +9,21 @@
 </p>
 
 
-<div style="display: flex; justify-content: center; margin-top: 30px; margin-bottom: 80px;">
-  <div style="margin: 0 10px;">
+<div align="center" display="inline-block" margin="50px">
+  <div display="inline-block;">
 
    ![CircleCI](https://img.shields.io/circleci/build/github/eduahcb/api_jwt?style=for-the-badge)
   
   </div>
 
 
-  <div style="margin: 0 10px;">
+  <div display="inline-block" style="margin: 0 10px;">
 
    ![Codecov](https://img.shields.io/codecov/c/github/eduahcb/api_jwt?style=for-the-badge)
   
   </div>
 
-  <div style="margin: 0 10px;">
+  <div display="inline-block" style="margin: 0 10px;">
 
    ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/eduahcb/api_jwt?style=for-the-badge)
 
