@@ -1,7 +1,5 @@
 import { getConnection } from 'typeorm'
 
-import RedisConnection from '@src/config/redis/connection'
-
 const truncatePostgres = async () => {
   const connection = getConnection()
   const entities = connection.entityMetadatas
@@ -13,17 +11,8 @@ const truncatePostgres = async () => {
   }
 }
 
-const truncateRedisKeys = async () => {
-  const connection = new RedisConnection()
-
-  const client = await connection.start()
-
-  client.flushAll()
-}
-
 const truncateDatabase = async (): Promise<void> => {
   truncatePostgres()
-  truncateRedisKeys()
 }
 
 export default truncateDatabase
