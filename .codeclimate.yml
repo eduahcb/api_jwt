@@ -4,10 +4,10 @@ plugins:
   duplication:
     enabled: true
     exclude_patters:
-      - src/database/**
+      - src/database/*
       - src/components/**/*.test.ts
 
-    config:
-      languages:
-        typescript:
-          mass_threshold: 50
+exclude_patters:
+  - build/**/*
+  - coverage/**
+  - node_modules/**/*
