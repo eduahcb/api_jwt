@@ -30,8 +30,8 @@ checks:
   identical-code:
     config:
       threshold: # language-specific defaults. an override will affect all languages.
-exclude_patters:
+
+exclude_patterns:
+  - "src/database/migrations/"
   - "**/node_modules/"
-  - "src/database/**/*"
-  - "src/components/**/*.test.ts"
-  - "src/database/migrations/1644064409797-CreateUser.ts"
+  - "**/*.test.ts"
