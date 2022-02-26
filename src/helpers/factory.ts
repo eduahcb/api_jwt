@@ -23,14 +23,17 @@ class Factory {
     this.factories.push(object)
   }
 
-  build(name: string, options?: object): object {
-    const factory = this.factories.reduce((prev: any, current: any) => {
+  private filterFactoryByName = (name: string) =>
+    this.factories.reduce((prev: any, current: any) => {
       if (current.name === name) {
         prev = current
       }
 
       return current
     }, {})
+
+  build(name: string, options?: object): object {
+    const factory = this.filterFactoryByName(name)
 
     const optionsResult = Object.assign({}, factory.options, options)
 
@@ -38,12 +41,7 @@ class Factory {
   }
 
   async create(name: string): Promise<any> {
-    const factory = this.factories.reduce((prev: any, current: any) => {
-      if (current.name === name) {
-        prev = current
-      }
-      return current
-    }, {})
+    const factory = this.filterFactoryByName(name)
     const repository = getRepository(factory.entity)
 
     const entity = await repository.save(factory.instance)
