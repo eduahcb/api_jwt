@@ -1,0 +1,13 @@
+version: 2
+
+plugins:
+  duplication:
+    enabled: true
+    exclude_patters:
+      - src/database/**
+      - src/components/**/*.test.ts
+
+    config:
+      languages:
+        typescript:
+          mass_threshold: 50
