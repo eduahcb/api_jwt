@@ -17,7 +17,7 @@
 
 /**
  * @openapi
- * /login:
+ * /logout:
  *  get:
  *   tags:
  *   - Logout

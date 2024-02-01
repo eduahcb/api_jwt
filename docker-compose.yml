@@ -4,19 +4,25 @@ services:
     image: redis
     container_name: api_jwt_redis
     networks:
-      - api_jwt_network
-  
+      - network
   postgres:
     image: postgres:12.9
-    restart: always
     container_name: api_jwt_postgres
     environment:
       - POSTGRES_PASSWORD=123
       - POSTGRES_USER=postgres
       - POSTGRES_DB=api_jwt_dev
     networks:
-      - api_jwt_network
-  
+      - network
+    depends_on:
+      - redis
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 5432:5432
   api:
     image: eduahcb/api_jwt
     container_name: api
@@ -25,7 +31,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=staging
       - PORT=8080
       - TYPEORM_CONNECTION=postgres
       - TYPEORM_HOST=postgres
@@ -33,15 +39,17 @@ services:
       - TYPEORM_USERNAME=postgres
       - TYPEORM_PASSWORD=123
       - TYPEORM_DATABASE=api_jwt_dev
+      - REDIS_HOST=api_jwt_redis
       - TYPEORM_MIGRATIONS=build/database/migrations/*.js
       - TYPEORM_ENTITIES=build/components/**/*.entity.js
-    command: yarn typeorm migration:run
-    entrypoint: yarn start
+    entrypoint: ["/bin/sh", "./development.sh"]
+    # entrypoint: ["ls", "-la", "build"]
     networks:
-      - api_jwt_network
+      - network
     depends_on:
-      - "redis"
-      - "postgres"
+      postgres:
+        condition: service_healthy
 networks:
-  api_jwt_network:
+  network:
+    name: api_network
     driver: bridge

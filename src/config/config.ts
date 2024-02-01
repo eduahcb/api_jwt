@@ -3,7 +3,7 @@ import convict from 'convict'
 const config = convict({
   env: {
     doc: 'The application environment',
-    format: ['production', 'development', 'test'],
+    format: ['production', 'development', 'test', 'staging'],
     default: 'development',
     env: 'NODE_ENV',
   },
@@ -24,6 +24,12 @@ const config = convict({
     format: '*',
     default: '',
     env: 'ROLLBAR_ACCESS_TOKEN',
+  },
+  redisHost: {
+    doc: 'redis host name',
+    format: '*',
+    default: 'localhost',
+    env: 'REDIS_HOST',
   },
 })
 
