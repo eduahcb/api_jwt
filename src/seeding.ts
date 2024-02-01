@@ -23,10 +23,10 @@ async function init() {
     } else {
       console.log('user already exists')
     }
-
-    await connection.close()
   } catch (error) {
     console.log(error)
+  } finally {
+    await connection.close()
   }
 }
 

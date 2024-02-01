@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "eduahcb <dev_eduardo@hotmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": "^16.13.1"
+  },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/convict": "^6.1.1",

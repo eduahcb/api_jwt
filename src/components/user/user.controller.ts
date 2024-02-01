@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { getRepository, Repository } from 'typeorm'
+import { getRepository } from 'typeorm'
 import { NotFoundException } from '@src/exceptions'
 
 import User from './user.entity'
@@ -7,22 +7,18 @@ import UserForm from './user.dto'
 import UserResponse from './user.response'
 
 class UserController {
-  userRepository: Repository<User>
-
-  constructor() {
-    this.userRepository = getRepository(User)
-  }
-
   create = async (req: Request, res: Response): Promise<void> => {
+    const userRepository = getRepository(User)
     const newUser = await new UserForm(req.body).toModel()
 
-    const user = await this.userRepository.save(newUser)
+    const user = await userRepository.save(newUser)
 
     res.status(201).json(user)
   }
 
   getAll = async (req: Request, res: Response): Promise<void> => {
-    const users = await this.userRepository.find()
+    const userRepository = getRepository(User)
+    const users = await userRepository.find()
 
     const usersResponse = users.map((user) => new UserResponse(user))
 
@@ -30,9 +26,10 @@ class UserController {
   }
 
   getById = async (req: Request, res: Response): Promise<void> => {
+    const userRepository = getRepository(User)
     const { id } = req.params
 
-    const user = await this.userRepository.findOne(id)
+    const user = await userRepository.findOne(id)
 
     if (!user) {
       throw new NotFoundException()
@@ -44,15 +41,16 @@ class UserController {
   }
 
   delete = async (req: Request, res: Response): Promise<void> => {
+    const userRepository = getRepository(User)
     const { id } = req.params
 
-    const user = await this.userRepository.findOne(id)
+    const user = await userRepository.findOne(id)
 
     if (!user) {
       throw new NotFoundException()
     }
 
-    await this.userRepository.delete(id)
+    await userRepository.delete(id)
 
     res.status(204).send()
   }

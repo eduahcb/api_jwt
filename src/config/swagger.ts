@@ -1,6 +1,18 @@
 import swaggerJsdoc from 'swagger-jsdoc'
 import { apiBaseUrl } from './constants/constants'
 
+import config from './config'
+
+const env = config.get('env')
+
+let apisPath = ''
+
+if (env === 'development' || env === 'test') {
+  apisPath = './src/components/**/*.swagger.ts'
+} else {
+  apisPath = './build/components/**/*.swagger.js'
+}
+
 export default () => {
   const options = {
     definition: {
@@ -20,7 +32,7 @@ export default () => {
         },
       ],
     },
-    apis: ['./src/components/**/*.swagger.ts'],
+    apis: [apisPath],
   }
 
   return swaggerJsdoc(options)

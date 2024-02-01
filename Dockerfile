@@ -1,32 +1,25 @@
-# BUILD STAGE 
-FROM node:16.13.1-alpine AS apibuild
+FROM node:16.13.1-alpine AS base
+
+# INSTALL dependencies
+FROM base AS dependencies
 
 # CREATING WORKDIR
 WORKDIR /api_jwt
 
-COPY package.json /api_jwt/
-COPY yarn.lock /api_jwt/
-COPY development.sh /api_jwt/
-COPY tsconfig.json /api_jwt/
-COPY src /api_jwt/src/
+COPY package.json yarn.lock development.sh tsconfig.json /api_jwt/
+COPY src /api_jwt/src
 COPY @types /api_jwt/@types
 
-
-# INSTALL DEPENDENCES
-RUN yarn install
-
-# CREATE BUILD
+RUN yarn install --frozen-lockfile --cache-folder=/api_jwt/.cache
 RUN yarn build
 
-
-# PROD STAGE
-FROM node:16.13.1-alpine
+# RUN BUILD APPLICATION
+FROM base AS application
 
 WORKDIR /api_jwt
-COPY package.json /api_jwt
-COPY yarn.lock /api_jwt
-COPY development.sh /api_jwt
-COPY --from=apibuild /api_jwt/build ./build
+COPY --from=dependencies /api_jwt/build ./build
+COPY --from=dependencies /api_jwt/development.sh .
+COPY --from=dependencies /api_jwt/node_modules ./node_modules
 
 # ENV NODE_ENV=staging
 # ENV PORT=8080
@@ -45,9 +38,7 @@ COPY --from=apibuild /api_jwt/build ./build
 #ENV JWT_SECRET_KEY
 #ENV ROLLBAR_ACCESS_TOKEN
 
-RUN yarn install
 RUN chmod +x development.sh
 
-ENTRYPOINT ["/bin/sh", "./development.sh"]
-
+ENTRYPOINT ["node", "build/server.js"]
 EXPOSE 8080

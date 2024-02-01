@@ -1,10 +1,10 @@
 #!/bin/bash
 
 echo "RUNNING MIGRATIONS"
-yarn typeorm migration:run
+node ./node_modules/typeorm/cli.js migration:run
 
 echo "RUNNING SEEDS"
-yarn seed
+node ./build/seeding.js
 
 echo "STARTING APPLICATION"
-yarn start
+node build/server.js
